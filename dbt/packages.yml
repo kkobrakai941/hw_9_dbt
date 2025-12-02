@@ -1,0 +1,11 @@
+packages:
+  - package: dbt-labs/dbt_utils
+    version: 1.0.0
+  - package: calogica/dbt_expectations
+    version: 0.9.0
+  - package: elementary-data/elementary
+    version: 0.10.6
+  - package: data-mie/dbt_date
+    version: 0.9.0
+  - package: tinitus/dbt_project_evaluator
+    version: 0.8.0
