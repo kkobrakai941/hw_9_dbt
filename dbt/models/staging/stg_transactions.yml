@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: stg_transactions
+    description: "Cleaned and transformed transaction data."
+    columns:
+      - name: transaction_time
+        description: "Timestamp of the transaction."
+        tests:
+          - not_null
+      - name: merch
+        description: "Merchant identifier."
+      - name: cat_id
+        description: "Transaction category."
+      - name: amount
+        description: "Transaction amount in dollars."
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+      - name: name_1
+        description: "First name of the customer."
+      - name: name_2
+        description: "Last name of the customer."
+      - name: gender
+        description: "Gender of the customer (M/F)."
+        tests:
+          - accepted_values:
+              values: ['M', 'F']
+      - name: street
+        description: "Street address of the customer."
+      - name: one_city
+        description: "City of the customer."
+      - name: us_state
+        description: "US state code of the customer."
+      - name: post_code
+        description: "Postal code of the customer."
+      - name: lat
+        description: "Latitude of the customer."
+      - name: lon
+        description: "Longitude of the customer."
+      - name: population_city
+        description: "Population of the customer's city."
+      - name: jobs
+        description: "Job description or sector for the customer."
+      - name: merchant_lat
+        description: "Latitude of the merchant location."
+      - name: merchant_lon
+        description: "Longitude of the merchant location."
+      - name: is_fraud
+        description: "Fraud indicator (1=fraud, 0=legit)."
+        tests:
+          - accepted_values:
+              values: [0, 1]
+      - name: amount_bucket
+        description: "Segment of transaction amount (low, medium, high)."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['low', 'medium', 'high']
