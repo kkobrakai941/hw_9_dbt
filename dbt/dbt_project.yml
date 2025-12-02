@@ -1,0 +1,25 @@
+name: "hw_9_dbt"
+version: "1.0.0"
+config-version: 2
+
+profile: "clickhouse_profile"
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+snapshot-paths: []
+
+models:
+  hw_9_dbt:
+    +materialized: table
+    staging:
+      +materialized: view
+      +schema: staging
+    marts:
+      +materialized: table
+      +schema: marts
+
+vars:
+  low_bound: 10
+  medium_bound: 100
